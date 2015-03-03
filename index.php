@@ -19,7 +19,7 @@
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
         <link href="assets/css/style.css" rel="stylesheet" type="text/css">
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="assets/js/jquery.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
                 $('#map_canvas').css({ height: $(window).innerHeight() });
