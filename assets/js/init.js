@@ -36,11 +36,11 @@ function initialize() {
             return;
         }
         
-        if( typeof markers !== 'undefined' ) {
-        	for ( var i = 0, marker; marker = markers[i]; i++ ) {
-    	        marker.setMap(null);
-	        }
-        }
+        // if( typeof markers !== 'undefined' ) {
+        // 	for ( var i = 0, marker; marker = markers[i]; i++ ) {
+    	   //      marker.setMap(null);
+	       //  }
+        // }
 
         // For each place, get the icon, place name, and location.
 		markers = [];
@@ -90,11 +90,11 @@ function initialize() {
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
+// Function to get markers from the Twitter API
 function getMarkers(hashtag,lat,long) {
     
-    items     = [hashtag];
-    console.log(items);
-    storeLocalData(items);
+    // lets store this in local storage
+    storeLocalData(hashtag);
 
 	URL = 'processfeed.php'
 	return $.ajax({
@@ -104,18 +104,26 @@ function getMarkers(hashtag,lat,long) {
 		data: 'hashtag='+hashtag+'&lat='+lat+'&long='+long,
 		dataType : 'text',
 		beforeSend: function(){
-					},
+            $(".container-fluid").addClass("widget-body-ajax-loading");
+        },
+        success : function(data){
+        },
 		complete:  function(){
-				},
-		success : function(data){
-		}
+            $(".container-fluid").removeClass("widget-body-ajax-loading");
+        }
 	});
 }
 
+// Function to store data in HTML5 localStorage.
+// Other options (mongoDB, PostgresSQL, Mysql)
 function storeLocalData(searchTerm) {
 	if (localStorage) {
 		// LocalStorage is supported!
-		localStorage.setItem('searchItem',JSON.stringify(searchTerm));
+        // Retrieve the last search from localStorage.
+        var searchItem = JSON.parse(localStorage.getItem('searchItem'));
+
+        searchItem.push(searchTerm);
+		localStorage.setItem('searchItem',JSON.stringify(searchItem));
 	} else {
 	   // No support. Use a fallback such as browser cookies or store on the server.
 	}

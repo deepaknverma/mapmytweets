@@ -29,12 +29,15 @@
 
                 // Retrieve the last search from localStorage.
                 var searchItem = JSON.parse(localStorage.getItem('searchItem'));
-                console.log(searchItem);
 
+                var list = '';
                 if (searchItem != "undefined" || searchItem != "null") {
-                document.getElementById('search-container').innerHTML = '<li>' + searchItem + '</li>';
+                    $.each( searchItem, function( key, value ) {
+                        list += '<li>' + value + '</li>';
+                    });
+                    document.getElementById('search-container').innerHTML = list;
                 } else {
-                document.getElementById('search-container').innerHTML = "<li>&nbsp;</li>";
+                    document.getElementById('search-container').innerHTML = "<li>&nbsp;</li>";
                 }
             });
         </script>

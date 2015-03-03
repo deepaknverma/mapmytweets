@@ -56,3 +56,12 @@ input[type=submit]{
     transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
     
 }
+
+.body-ajax-loading::before {
+    content: url('../img/ajax-loader.gif');
+    padding-top: 18%;
+    position: absolute;
+}
+.body-ajax-loading:hover {
+   cursor: wait !important;
+ }
