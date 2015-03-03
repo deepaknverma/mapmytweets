@@ -122,7 +122,7 @@ function storeLocalData(searchTerm) {
 		// LocalStorage is supported!
         // Retrieve the last search from localStorage.
         var searchItem = JSON.parse(localStorage.getItem('searchItem'));
-
+        console.log(searchItem);
         searchItem.push(searchTerm);
 		localStorage.setItem('searchItem',JSON.stringify(searchItem));
 	} else {
