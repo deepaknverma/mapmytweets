@@ -36,13 +36,12 @@ function initialize() {
         if (places.length == 0) {
             return;
         }
-        
-        // if( typeof markers !== 'undefined' ) {
-        // 	for ( var i = 0, marker; marker = markers[i]; i++ ) {
-    	   //      marker.setMap(null);
-	       //  }
-        // }
-
+        if( markers) {
+            for (i=0; i < markers.length; i++) {
+                markers[i].setMap(null);
+            }
+            markers.length = 0;
+        }
         // For each place, get the icon, place name, and location.
 		markers = [];
 
@@ -52,7 +51,7 @@ function initialize() {
         var responseMarkers = JSON.parse(getMarkers(hashtag, lat, long).responseText);
 
 		$.each(responseMarkers, function(i) {
-			markers.push(['London Eye, London',responseMarkers[i].lat, responseMarkers[i].long]);
+			markers.push(['tweet places, twitter tweets',responseMarkers[i].lat, responseMarkers[i].long]);
 			infoWindowContent.push(['<p>'+responseMarkers[i].content+'</p>']);
 		});
 
@@ -118,11 +117,13 @@ function getMarkers(hashtag,lat,long) {
 // Function to store data in HTML5 localStorage.
 // Other options (mongoDB, PostgresSQL, Mysql)
 function storeLocalData(searchTerm) {
+
+    var searchItem = [];
 	if (localStorage) {
 		// LocalStorage is supported!
         // Retrieve the last search from localStorage.
-        var searchItem = JSON.parse(localStorage.getItem('searchItem'));
-        console.log(searchItem);
+        searchItem = JSON.parse(localStorage.getItem('searchItem'));
+        //console.log(searchItem);
         searchItem.push(searchTerm);
 		localStorage.setItem('searchItem',JSON.stringify(searchItem));
 	} else {
