@@ -65,7 +65,7 @@
 </body>
 
     <!-- JavaScript to show google map -->
-    <script src="http://maps.googleapis.com/maps/api/js?v=3&sensor=false&extension=.js&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3&sensor=false&extension=.js&libraries=places"></script>
     <script type="text/javascript" src="assets/js/init.js"></script>
 </html>
 
