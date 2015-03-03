@@ -49,7 +49,6 @@ function initialize() {
         var infoWindowContent = [];
 
         var responseMarkers = JSON.parse(getMarkers(hashtag, lat, long).responseText);
-        console.log(responseMarkers);
 
 		$.each(responseMarkers, function(i) {
 			markers.push(['London Eye, London',responseMarkers[i].lat, responseMarkers[i].long]);
@@ -92,7 +91,11 @@ function initialize() {
 google.maps.event.addDomListener(window, 'load', initialize);
 
 function getMarkers(hashtag,lat,long) {
-	storeLocalData(hashtag);
+    
+    items     = [hashtag];
+    console.log(items);
+    storeLocalData(items);
+
 	URL = 'processfeed.php'
 	return $.ajax({
 		type : 'POST',
@@ -112,8 +115,8 @@ function getMarkers(hashtag,lat,long) {
 function storeLocalData(searchTerm) {
 	if (localStorage) {
 		// LocalStorage is supported!
-		localStorage.setItem('searchItem', searchTerm);
+		localStorage.setItem('searchItem',JSON.stringify(searchTerm));
 	} else {
-	// No support. Use a fallback such as browser cookies or store on the server.
+	   // No support. Use a fallback such as browser cookies or store on the server.
 	}
 }

@@ -32,7 +32,7 @@ echo json_encode($result);
 function get_tweets_by_location($hashtag, $lat, $long, $settings ){
 
     $url            = 'https://api.twitter.com/1.1/search/tweets.json';
-    $getfield       = '?q='.$hashtag.'&geocode='.$lat.','.$long.',1mi&count=10';
+    $getfield       = '?q='.$hashtag.'&geocode='.$lat.','.$long.',1mi&count=100';
     $requestMethod  = 'GET';
     $twitter        = new TwitterAPIExchange( $settings );
     $result         = json_decode( $twitter->setGetfield( $getfield )->buildOauth( $url, $requestMethod )->performRequest() );
