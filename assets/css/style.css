@@ -1,0 +1,58 @@
+html, body, #map-canvas {
+    height: 100%;
+    margin: 0px;
+    padding: 0px
+}
+
+
+body {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:12px;
+    color:#333;
+    line-height:18px;
+    width:100%;
+    height: 100%;
+    height:calc(100% - 0px);
+}
+input[type=text]{
+    padding:0.5em;
+    width:20em;
+}
+
+input[type=submit]{
+    padding:0.4em;
+}
+
+#map-canvas {
+    width:100%;
+    height: 100%;
+    height:calc(100% - 0px);
+}
+
+#map_canvas img {
+    max-width: none !important;
+}
+
+#map-label{
+    margin:1em 0;
+}
+
+#input-address{
+    top: 20% !important;
+    right: 88px !important;
+    left: 80% !important;
+    width: 300px !important;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: #555;
+    display: block;
+    font-size: 13px;
+    height: 32px;
+    line-height: 1.42857;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    
+}
