@@ -1,6 +1,7 @@
 function initialize() {
     var bounds 		= new google.maps.LatLngBounds();
     var markers 	= [];
+    var places      = [];
     var mapOptions 	= {
         zoom: 8,
         mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -32,9 +33,9 @@ function initialize() {
 		lat 		= places[0].geometry.location.k;
 		long 		= places[0].geometry.location.B;
 
-        // if (places.length == 0) {
-        //     return;
-        // }
+        if (places.length == 0) {
+            return;
+        }
         
         // if( typeof markers !== 'undefined' ) {
         // 	for ( var i = 0, marker; marker = markers[i]; i++ ) {
