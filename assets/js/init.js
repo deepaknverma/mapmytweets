@@ -145,7 +145,7 @@ function getMarkers(hashtag,lat,long) {
 function storeLocalData(searchTerm) {
 
     var newObject = { "hastag": searchTerm, "count": 1 };
-    var isFound = false;
+    
 	if ( localStorage ) 
     {
 		// LocalStorage is supported!
@@ -173,7 +173,7 @@ function storeLocalData(searchTerm) {
         }
         //searchItem.push(searchTerm);
         localStorage.setItem('searchItem',JSON.stringify(searchItem));
-        //getSearchHistory();
+        getSearchHistory();
 	} else {
 	   // No support. Use a fallback such as browser cookies or store on the server.
 	}
