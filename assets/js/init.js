@@ -72,7 +72,7 @@ var displayMarkers = function(hashtag, lat, long){
             {
                 location = responseMarkers[i].location;
             }
-			data.push([ name + ', ' + location,responseMarkers[i].lat, responseMarkers[i].long]);
+			data.push([ name + ', ' + location,responseMarkers[i].lat, responseMarkers[i].long, responseMarkers[i].image ]);
 			infoWindowContent.push(['<div class="info-window"><p>'+responseMarkers[i].content+'</p><p>by <strong>' + responseMarkers[i].name + '</strong> on <i>' + responseMarkers[i].timestamp + '</i></p></div>']);
 
 		});
@@ -90,7 +90,8 @@ var displayMarkers = function(hashtag, lat, long){
             marker = new google.maps.Marker({
                         position: position,
                         map     : map,
-                        title   : data[i][0]
+                        title   : data[i][0],
+                        icon 	: data[i][3]
             }); 
             markerArray.push(marker);
             
