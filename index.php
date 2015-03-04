@@ -26,42 +26,35 @@
                 $(window).resize(function(){
                     $('#map_canvas').css({ height: $(window).innerHeight() });
                 });
+                
+                // Display Search History
+                getSearchHistory();
 
-                // Retrieve the last search from localStorage.
-                var searchItem = JSON.parse(localStorage.getItem('searchItem'));
-
-                var list = '';
-                if (searchItem != "undefined" || searchItem != "null") {
-                    $.each( searchItem, function( key, value ) {
-                        list += '<li>' + value + '</li>';
-                    });
-                    document.getElementById('search-container').innerHTML = list;
-                } else {
-                    document.getElementById('search-container').innerHTML = "<li>&nbsp;</li>";
-                }
             });
         </script>
 
     </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="col-md-3 col-md-offset-3">
-            <input id="input-address" class="controls" type="text" placeholder="Search your area">
-        </div>
-        <!-- google map will be shown here -->
-        <div id="map-canvas" style="height:800px;">Loading map...</div>
-        <div id='map-label'>Map shows approximate location.</div>
-    </div>
     <div class="row">
-        <div class="col-md-12">
-            <h2>Search History:</h2><hr>
-            <ul id="search-container">
-                
-            </ul>
+        <div id="history-container" class="col-md-2">
+            <div class="col-md-12">
+                <h3>Search History:</h3><hr>
+                <ul id="search-container" class="list-group"></ul>    
+            </div>
         </div>
-    </div>
+        <div class="col-md-10">
+        
+                <div class="col-md-3 col-md-offset-3">
+                    <input id="input-address" class="controls" type="text" placeholder="Search your area">
+                </div>
 
+                <!-- google map will be shown here -->
+                <div id="map-canvas" style="height:800px;">Loading map...</div>
+                <div id='map-label'>Map shows approximate location.</div>
+
+        </div> <!-- END col-md-11 -->
+    </div> <!-- END row -->
 </body>
 
     <!-- JavaScript to show google map -->

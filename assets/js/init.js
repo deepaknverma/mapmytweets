@@ -1,7 +1,9 @@
 function initialize() {
-    var bounds 		= new google.maps.LatLngBounds();
-    var markers 	= [];
-    var places      = [];
+    var bounds 	            = new google.maps.LatLngBounds();
+    var markers             = [];
+    var places              = [];
+    var infoWindowContent   = [];
+
     var mapOptions 	= {
         zoom: 8,
         mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -10,6 +12,7 @@ function initialize() {
     // Display a map on the page
     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
+    // Default bounds for the map if not set
     var defaultBounds = new google.maps.LatLngBounds(
         new google.maps.LatLng(-33.8902, 151.1759),
         new google.maps.LatLng(-33.8474, 151.2631)
@@ -36,23 +39,35 @@ function initialize() {
         if (places.length == 0) {
             return;
         }
-        if( markers) {
-            for (i=0; i < markers.length; i++) {
-                markers[i].setMap(null);
-            }
-            markers.length = 0;
-        }
-        // For each place, get the icon, place name, and location.
-		markers = [];
 
-        // Info Window Content
-        var infoWindowContent = [];
+        // console.log('Markers: '+markers);
+        // //Clearing markers, if they exist
+        // if(markers && markers.length !== 0){
+        //     for(var i = 0; i < markers.length; ++i){
+        //         markers[i].setMap(null);
+        //     }
+        //     markers.length = 0;
+        // }
 
         var responseMarkers = JSON.parse(getMarkers(hashtag, lat, long).responseText);
 
 		$.each(responseMarkers, function(i) {
-			markers.push(['tweet places, twitter tweets',responseMarkers[i].lat, responseMarkers[i].long]);
+            //markers.push([responseMarkers[i].name, responseMarkers[i].location, responseMarkers[i].lat, responseMarkers[i].long]);
+            var name    = hashtag + ' tweet';
+            var location= hashtag;
+
+            if( responseMarkers[i].name ) 
+            {
+                name = responseMarkers[i].name
+            }
+
+            if( responseMarkers[i].location )
+            {
+                location = responseMarkers[i].location;
+            }
+			markers.push([ name + ', ' + location,responseMarkers[i].lat, responseMarkers[i].long]);
 			infoWindowContent.push(['<p>'+responseMarkers[i].content+'</p>']);
+
 		});
 
         // Display multiple markers on a map
@@ -64,8 +79,8 @@ function initialize() {
             bounds.extend(position);
             marker = new google.maps.Marker({
                         position: position,
-                        map: map,
-                        title: markers[i][0]
+                        map     : map,
+                        title   : markers[i][0]
             });            
 
             // Allow each marker to have an info window    
@@ -86,6 +101,17 @@ function initialize() {
         this.setZoom(14);
         google.maps.event.removeListener(boundsListener);
     });
+}
+
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers() {
+    setAllMap(null);
+}
+
+// Deletes all markers in the array by removing references to them.
+function deleteMarkers() {
+    clearMarkers();
+    markers = [];
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
@@ -118,15 +144,64 @@ function getMarkers(hashtag,lat,long) {
 // Other options (mongoDB, PostgresSQL, Mysql)
 function storeLocalData(searchTerm) {
 
-    var searchItem = [];
-	if (localStorage) {
+    var newObject = { "hastag": searchTerm, "count": 1 };
+    var isFound = false;
+	if ( localStorage ) 
+    {
 		// LocalStorage is supported!
         // Retrieve the last search from localStorage.
         searchItem = JSON.parse(localStorage.getItem('searchItem'));
-        //console.log(searchItem);
-        searchItem.push(searchTerm);
-		localStorage.setItem('searchItem',JSON.stringify(searchItem));
+
+        if( searchItem == null || searchItem.length == 0 )
+        {
+            var searchItem = [];
+            searchItem.push(newObject);          
+        } else {
+           $.each( searchItem, function( key, value ) 
+           {
+                if(searchTerm  == value.hastag)
+                {
+                    value.count = value.count + 1;
+                }
+
+            });
+            if( !lookup( searchTerm ) ) {
+                searchItem.push(newObject);
+
+            }
+           
+        }
+        //searchItem.push(searchTerm);
+        localStorage.setItem('searchItem',JSON.stringify(searchItem));
+        //getSearchHistory();
 	} else {
 	   // No support. Use a fallback such as browser cookies or store on the server.
 	}
+}
+
+function lookup( searchTerm ){
+
+    // Retrieve the last search from localStorage.
+    searchItem = JSON.parse(localStorage.getItem('searchItem'));
+
+    for(var i = 0, len = searchItem.length; i < len; i++) {
+        if( searchItem[ i ].hastag === searchTerm )
+            return true;
+    }
+    return false;
+}
+
+function getSearchHistory(){
+    // Retrieve the last search from localStorage.
+    var searchItem = JSON.parse(localStorage.getItem('searchItem'));
+    var list = '';
+    
+    if (searchItem == "undefined" || searchItem == null) {
+        //document.getElementById('search-container').innerHTML = "<li>&nbsp;</li>";
+    } else {
+        $.each( searchItem, function( key, value ) {
+        list += '<li class="list-group-item">' + value.hastag + '<span class="badge">'+ value.count+'</span></li>';
+    });
+    document.getElementById('search-container').innerHTML = list;
+    }
 }

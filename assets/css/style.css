@@ -65,3 +65,16 @@ input[type=submit]{
 .body-ajax-loading:hover {
    cursor: wait !important;
  }
+
+ #history-container{
+    background: url(../img/pattern-89ds.png);
+    -webkit-box-shadow: 2px 0px 12px -1px rgba(0,0,0,0.69);
+    -moz-box-shadow: 2px 0px 12px -1px rgba(0,0,0,0.69);
+    box-shadow: 2px 0px 12px -1px rgba(0,0,0,0.69);
+    padding:15px;
+    min-height: 70em;
+ }
+
+ #history-container hr {
+    border-top: 1px solid #6E6E6E;
+ }

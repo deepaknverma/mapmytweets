@@ -32,7 +32,7 @@ echo json_encode($result);
 function get_tweets_by_location($hashtag, $lat, $long, $settings ){
 
     $url            = 'https://api.twitter.com/1.1/search/tweets.json';
-    $getfield       = '?q='.$hashtag.'&geocode='.$lat.','.$long.',1mi&count=100';
+    $getfield       = '?q='.$hashtag.'&geocode='.$lat.','.$long.',1mi&result_type=mixed&count=100';
     $requestMethod  = 'GET';
     $twitter        = new TwitterAPIExchange( $settings );
     $result         = json_decode( $twitter->setGetfield( $getfield )->buildOauth( $url, $requestMethod )->performRequest() );
@@ -45,7 +45,10 @@ function get_tweets_by_location($hashtag, $lat, $long, $settings ){
             'timestamp' => $row->user->created_at,
             'lat'       => $row->geo->coordinates[0],
             'long'      => $row->geo->coordinates[1],
-            'content'   => $row->text
+            'content'   => $row->text,
+            'name'      => $row->user->name,
+            'image'     => $row->user->profile_image_url,
+            'location'  => str_replace( ',', '', $row->user->location )
         );
         array_push($mapdata, $myrow);
     }
