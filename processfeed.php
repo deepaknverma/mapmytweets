@@ -1,9 +1,17 @@
 <?php
 /**
+ * Processing twitter API response
+ *
+ * PHP version 5.3.10
+ * 
  * Created by PhpStorm.
  * User: mankind
  * Date: 28/02/15
  * Time: 6:39 PM
+ * 
+ * @author   Deepak Verma <info@deepakverma.com.au>
+ * @license  MIT License
+ * 
  */
 
 ini_set('display_errors', 1);
@@ -34,10 +42,11 @@ function get_tweets_by_location($hashtag, $lat, $long, $settings ){
     $url            = 'https://api.twitter.com/1.1/search/tweets.json';
     $getfield       = '?q='.$hashtag.'&geocode='.$lat.','.$long.',1mi&result_type=mixed&count=100';
     $requestMethod  = 'GET';
-    $twitter        = new TwitterAPIExchange( $settings );
+    $twitter        = new TwitterApi( $settings );
     $result         = json_decode( $twitter->setGetfield( $getfield )->buildOauth( $url, $requestMethod )->performRequest() );
 
     $mapdata = array();
+
 
     foreach( $result->statuses as $row )
     {

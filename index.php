@@ -1,12 +1,19 @@
 <?php
 /**
+ * 
+ * PHP version 5.3.10
+ * 
  * Created by PhpStorm.
  * User: mankind
- * Date: 28/02/15
- * Time: 1:39 PM
- */
+ * Date: 02/03/15
+ * Time: 12:40 PM
+ * 
+ * @author   Deepak Verma <info@deepakverma.com.au>
+ * @license  MIT License
+ * 
+ **/
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
     <head>
@@ -18,6 +25,7 @@
 
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
         <link href="assets/css/style.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
         <script src="assets/js/jquery.js"></script>
         <script type="text/javascript">
@@ -32,18 +40,31 @@
 
             });
         </script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <script src="assets/js/bootbox.min.js"></script>
 
     </head>
 
 <body>
-    <div class="row">
-        <div id="history-container" class="col-md-2">
-            <div class="col-md-12">
-                <h3>Search History:</h3><hr>
-                <ul id="search-container" class="list-group"></ul>    
+    <div id="content" class="row">
+
+        <div id="history-container" class="col-md-2 col-sm-2 col-lg-2">
+
+            <div class="col-md-12 col-sm-12 col-lg-12">
+
+                <h3><i class="fa fa-history"></i> Search History: <a href="javascript:void(0);" onclick="clearHistory();" class="pull-right"><i class="fa fa-trash txt-color-white"></i></a></h3><hr>
+                <ul id="search-container" class="list-group"></ul>
+
             </div>
-        </div>
-        <div class="col-md-10">
+
+            <div class="info-box">
+            	<hr>
+            	<a href="javascript:void(0);" onclick="moreInfo();" class="btn btn-default col-md-12"> <i class="fa fa-info-circle"></i> Information</a>    
+            </div>            
+
+        </div> <!-- END #history-container -->
+
+        <div class="col-md-10 col-sm-10 col-lg-10">
         
                 <div class="col-md-3 col-md-offset-3">
                     <input id="input-address" class="controls" type="text" placeholder="Search your area">
@@ -53,7 +74,7 @@
                 <div id="map-canvas" style="height:800px;">Loading map...</div>
                 <div id='map-label'>Map shows approximate location.</div>
 
-        </div> <!-- END col-md-11 -->
+        </div> <!-- END col-md-10 -->
     </div> <!-- END row -->
 </body>
 

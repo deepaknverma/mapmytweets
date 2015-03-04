@@ -1,17 +1,19 @@
 <?php
-
 /**
- * Twitter-API-PHP : Simple PHP wrapper for the v1.1 API
+ * TWITTER PHP API
  *
  * PHP version 5.3.10
- *
- * @category Awesomeness
- * @package  Twitter-API-PHP
- * @author   James Mallison <me@j7mbo.co.uk>
+ * 
+ * Created by PhpStorm.
+ * User: mankind
+ * Date: 02/03/15
+ * Time: 12:40 PM
+ * 
+ * @author   Deepak Verma <info@deepakverma.com.au>
  * @license  MIT License
- * @link     http://github.com/j7mbo/twitter-api-php
  */
-class TwitterAPIExchange
+
+class TwitterApi
 {
     private $oauth_access_token;
     private $oauth_access_token_secret;
