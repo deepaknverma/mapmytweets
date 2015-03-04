@@ -75,6 +75,11 @@
                 <div id='map-label'>Map shows approximate location.</div>
 
         </div> <!-- END col-md-10 -->
+		<footer class="footer">
+			<div class="container">
+				<p id="footer-container" class="text-muted"><h6>&copy; 2014-2014 mapmytweet.herokuapp.com <strong>(MIT License)</strong></h6></p>
+			</div>
+		</footer>        
     </div> <!-- END row -->
 </body>
 
